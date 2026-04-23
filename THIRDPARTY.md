@@ -21,7 +21,17 @@ third-party material, append an entry here in the same format.
 
 ## 3D Assets
 
-*(none yet — add entries as assets are introduced)*
+### Quaternius — Ultimate Nature Pack (trees only, subset)
+- **Paths:** `worlds/soybean_farm/models/tree_common/`, `tree_pine/`,
+  `tree_birch/`, `tree_willow/`
+- **Source:** https://quaternius.com/packs/ultimatenature.html
+- **Author:** Quaternius (@quaternius)
+- **License:** CC0 1.0 (public domain)
+- **Modifications:** Extracted `CommonTree_1.obj`, `PineTree_1.obj`,
+  `BirchTree_1.obj`, `Willow_1.obj` (+ their .mtl files) and renamed
+  to `<tree>.obj` / `<tree>.mtl`. Updated `mtllib` line in each OBJ.
+- **Notes:** Quaternius OBJs are Y-up; the SDF world rotates them by
+  `-pi/2` around X so they stand upright in Gazebo (Z-up).
 
 ### Template
 ```
@@ -38,7 +48,17 @@ third-party material, append an entry here in the same format.
 
 ## Textures & Materials
 
-*(none yet)*
+### Poly Haven — brown_mud_leaves_01 (diffuse 1 K)
+- **Path:** `worlds/soybean_farm/ground/soil_color_1k.jpg`
+- **Source:** https://polyhaven.com/a/brown_mud_leaves_01
+- **License:** CC0 1.0 (public domain)
+- **Modifications:** None (direct JPG from Poly Haven's CDN).
+
+### Poly Haven — forrest_ground_01 (diffuse 1 K)
+- **Path:** `worlds/soybean_farm/ground/grass_color_1k.jpg`
+- **Source:** https://polyhaven.com/a/forrest_ground_01
+- **License:** CC0 1.0 (public domain)
+- **Modifications:** None.
 
 ---
 
