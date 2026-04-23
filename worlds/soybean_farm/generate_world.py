@@ -28,8 +28,8 @@ GRASS_L = 40.0
 NUM_TREES = 16  # perimeter props
 TREE_MODELS = ["tree_common", "tree_pine", "tree_birch", "tree_willow"]
 TREE_SCALE_RANGE = (0.9, 1.3)  # Quaternius trees are already ~2.5-3.5 m tall
-# Quaternius OBJs are Y-up; Gazebo expects Z-up -> roll by -90 deg when placed.
-TREE_ROLL = -math.pi / 2
+# Quaternius OBJs are Y-up; Gazebo expects Z-up -> roll by +90 deg when placed.
+TREE_ROLL = math.pi / 2
 
 random.seed(42)
 
