@@ -3,7 +3,13 @@
 A procedurally-generated soybean farm for Ignition Gazebo, built from Helios
 plant meshes with perimeter trees, PBR-textured ground, and dynamic shadows.
 
+Hero view:
+
 ![preview](preview.png)
+
+In-row close-up (stems + alpha-masked leaves visible):
+
+![close-up](preview_close.png)
 
 ## What's here
 

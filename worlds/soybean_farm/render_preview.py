@@ -199,18 +199,35 @@ restore_mtls()
 bpy.context.view_layer.update()
 
 
-# ---- Camera: cinematic 3/4 view over the field ----
-cam_data = bpy.data.cameras.new("Cam")
-cam = bpy.data.objects.new("Cam", cam_data)
-scene.collection.objects.link(cam)
-scene.camera = cam
-cam.location = (-5.5, -6.0, 3.8)
-look_at = Vector((0.3, 0.0, 0.3))
-direction = look_at - Vector(cam.location)
-cam.rotation_mode = "QUATERNION"
-cam.rotation_quaternion = direction.to_track_quat("-Z", "Y")
-cam_data.lens = 32
+# ---- Two cameras: hero overview + ground-level close-up ----
+def add_camera(name, loc, look, lens):
+    d = bpy.data.cameras.new(name)
+    o = bpy.data.objects.new(name, d)
+    scene.collection.objects.link(o)
+    o.location = loc
+    direction = Vector(look) - Vector(loc)
+    o.rotation_mode = "QUATERNION"
+    o.rotation_quaternion = direction.to_track_quat("-Z", "Y")
+    d.lens = lens
+    return o
+
+hero = add_camera("cam_hero", (-5.5, -6.0, 3.8), (0.3, 0.0, 0.3), 32)
+# Close-up looking between rows at ground level — stems should be visible
+# in the gap. Rows are along Y at X-positions ... -0.25, 0.25, 0.75 ... .
+# Position the camera in a row-gap (X=-0.75) looking along +Y through the field.
+closeup = add_camera("cam_close", (-0.75, -2.8, 0.08), (-0.75, 2.2, 0.15), 28)
 
 os.makedirs(os.path.dirname(out_png) or ".", exist_ok=True)
+
+# Render hero
+scene.camera = hero
+scene.render.filepath = out_png
 bpy.ops.render.render(write_still=True)
 print(f"RENDERED {out_png}")
+
+# Render close-up alongside (same dir, _close.png)
+close_png = os.path.splitext(out_png)[0] + "_close.png"
+scene.camera = closeup
+scene.render.filepath = close_png
+bpy.ops.render.render(write_still=True)
+print(f"RENDERED {close_png}")
