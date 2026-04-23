@@ -1,0 +1,23 @@
+# good_field.yaml — Balanced field for testing navigation + perception
+row_length: 10.0
+rows_count: 8
+row_width: 9.0
+row_segments:
+  - straight
+plant_height_min: 0.3
+plant_height_max: 0.5
+plant_spacing_min: 0.12
+plant_spacing_max: 0.18
+ground_elevation_max: 0.1
+ground_ditch_depth: 0.2
+hole_prob: 0.03
+hole_size_max: 4
+weeds: 5
+weed_types:
+  - nettle
+  - unknown_weed
+litters: 3
+litter_types:
+  - coke_can
+  - beer
+seed: 42

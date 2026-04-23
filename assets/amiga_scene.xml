@@ -1,0 +1,17 @@
+<mujoco model="AmigaV6_Scene">
+    <include file="amiga.xml"/>
+
+    <statistic center="0 0 0.5" extent="3"/>
+
+    <visual>
+        <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0.2 0.2 0.2"/>
+    </visual>
+
+    <worldbody>
+        <!-- Ground plane -->
+        <geom name="floor" type="plane" size="5 5 0.1" rgba="0.3 0.5 0.3 1" pos="0 0 0"/>
+
+        <!-- Lighting -->
+        <light name="sun" directional="true" diffuse="0.8 0.8 0.8" specular="0.3 0.3 0.3" pos="0 0 5" dir="0 0 -1"/>
+    </worldbody>
+</mujoco>

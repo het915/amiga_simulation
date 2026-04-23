@@ -1,0 +1,424 @@
+<?xml version="1.0"?>
+<robot name="amiga">
+
+  <!-- ============================================================ -->
+  <!-- MATERIALS                                                     -->
+  <!-- ============================================================ -->
+  <material name="dark_metal">
+    <color rgba="0.20 0.20 0.20 1.0"/>
+  </material>
+  <material name="light_metal">
+    <color rgba="0.95 0.95 0.95 1.0"/>
+  </material>
+  <material name="frame_metal">
+    <color rgba="0.45 0.45 0.45 1.0"/>
+  </material>
+  <material name="rubber_black">
+    <color rgba="0.10 0.10 0.10 1.0"/>
+  </material>
+  <material name="sensor_dark">
+    <color rgba="0.15 0.15 0.15 1.0"/>
+  </material>
+
+  <!-- ============================================================ -->
+  <!-- BASE LINK                                                     -->
+  <!-- ============================================================ -->
+  <link name="base_link">
+    <inertial>
+      <mass value="60.0"/>
+      <origin xyz="0 0 0.45" rpy="0 0 0"/>
+      <inertia ixx="5.0" ixy="0" ixz="0" iyy="5.0" iyz="0" izz="5.0"/>
+    </inertial>
+
+    <!-- ========== SIDE RAILS (lower frame) ========== -->
+    <!-- Left outer rail -->
+    <visual name="truck_bar_left_outer">
+      <origin xyz="0 0.65 0.4" rpy="0 0 0"/>
+      <geometry><box size="1.3 0.05 0.05"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="truck_bar_left_outer_col">
+      <origin xyz="0 0.65 0.4" rpy="0 0 0"/>
+      <geometry><box size="1.3 0.05 0.05"/></geometry>
+    </collision>
+
+    <!-- Left inner rail -->
+    <visual name="truck_bar_left_inner">
+      <origin xyz="0 0.55 0.4" rpy="0 0 0"/>
+      <geometry><box size="1.3 0.05 0.05"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="truck_bar_left_inner_col">
+      <origin xyz="0 0.55 0.4" rpy="0 0 0"/>
+      <geometry><box size="1.3 0.05 0.05"/></geometry>
+    </collision>
+
+    <!-- Right outer rail -->
+    <visual name="truck_bar_right_outer">
+      <origin xyz="0 -0.65 0.4" rpy="0 0 0"/>
+      <geometry><box size="1.3 0.05 0.05"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="truck_bar_right_outer_col">
+      <origin xyz="0 -0.65 0.4" rpy="0 0 0"/>
+      <geometry><box size="1.3 0.05 0.05"/></geometry>
+    </collision>
+
+    <!-- Right inner rail -->
+    <visual name="truck_bar_right_inner">
+      <origin xyz="0 -0.55 0.4" rpy="0 0 0"/>
+      <geometry><box size="1.3 0.05 0.05"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="truck_bar_right_inner_col">
+      <origin xyz="0 -0.55 0.4" rpy="0 0 0"/>
+      <geometry><box size="1.3 0.05 0.05"/></geometry>
+    </collision>
+
+    <!-- ========== VERTICAL UPRIGHTS (8 total) ========== -->
+    <!-- Left side, outer rod (y=0.65) -->
+    <visual name="upright_lo_1">
+      <origin xyz="-0.025 0.65 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="upright_lo_1_col">
+      <origin xyz="-0.025 0.65 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+    </collision>
+    <visual name="upright_lo_2">
+      <origin xyz="0.025 0.65 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="upright_lo_2_col">
+      <origin xyz="0.025 0.65 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+    </collision>
+    <!-- Left side, inner rod (y=0.55) -->
+    <visual name="upright_li_1">
+      <origin xyz="-0.025 0.55 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="upright_li_1_col">
+      <origin xyz="-0.025 0.55 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+    </collision>
+    <visual name="upright_li_2">
+      <origin xyz="0.025 0.55 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="upright_li_2_col">
+      <origin xyz="0.025 0.55 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+    </collision>
+    <!-- Right side, inner rod (y=-0.55) -->
+    <visual name="upright_ri_1">
+      <origin xyz="-0.025 -0.55 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="upright_ri_1_col">
+      <origin xyz="-0.025 -0.55 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+    </collision>
+    <visual name="upright_ri_2">
+      <origin xyz="0.025 -0.55 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="upright_ri_2_col">
+      <origin xyz="0.025 -0.55 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+    </collision>
+    <!-- Right side, outer rod (y=-0.65) -->
+    <visual name="upright_ro_1">
+      <origin xyz="-0.025 -0.65 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="upright_ro_1_col">
+      <origin xyz="-0.025 -0.65 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+    </collision>
+    <visual name="upright_ro_2">
+      <origin xyz="0.025 -0.65 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="upright_ro_2_col">
+      <origin xyz="0.025 -0.65 1.15" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 1.5"/></geometry>
+    </collision>
+
+    <!-- ========== CROSS BRACES (4 lateral bars connecting left to right) ========== -->
+    <!-- Top pair at z=1.9 (top of uprights) -->
+    <visual name="brace_top_1">
+      <origin xyz="-0.025 0 1.9" rpy="0 0 0"/>
+      <geometry><box size="0.05 1.4 0.05"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="brace_top_1_col">
+      <origin xyz="-0.025 0 1.9" rpy="0 0 0"/>
+      <geometry><box size="0.05 1.4 0.05"/></geometry>
+    </collision>
+
+    <visual name="brace_top_2">
+      <origin xyz="0.025 0 1.9" rpy="0 0 0"/>
+      <geometry><box size="0.05 1.4 0.05"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="brace_top_2_col">
+      <origin xyz="0.025 0 1.9" rpy="0 0 0"/>
+      <geometry><box size="0.05 1.4 0.05"/></geometry>
+    </collision>
+
+    <!-- Second top pair offset in X for strength -->
+    <visual name="brace_top_3">
+      <origin xyz="-0.075 0 1.9" rpy="0 0 0"/>
+      <geometry><box size="0.05 1.4 0.05"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="brace_top_3_col">
+      <origin xyz="-0.075 0 1.9" rpy="0 0 0"/>
+      <geometry><box size="0.05 1.4 0.05"/></geometry>
+    </collision>
+
+    <visual name="brace_top_4">
+      <origin xyz="0.075 0 1.9" rpy="0 0 0"/>
+      <geometry><box size="0.05 1.4 0.05"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="brace_top_4_col">
+      <origin xyz="0.075 0 1.9" rpy="0 0 0"/>
+      <geometry><box size="0.05 1.4 0.05"/></geometry>
+    </collision>
+
+    <!-- ========== ANTENNA POLE (from top frame upward) ========== -->
+    <visual name="antenna_pole">
+      <origin xyz="0 0 2.25" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 0.7"/></geometry>
+      <material name="frame_metal"/>
+    </visual>
+    <collision name="antenna_pole_col">
+      <origin xyz="0 0 2.25" rpy="0 0 0"/>
+      <geometry><box size="0.04 0.04 0.7"/></geometry>
+    </collision>
+
+    <!-- ========== FORKS ========== -->
+    <!-- Left side forks get 180° Z mirror -->
+    <visual name="fork_fl">
+      <origin xyz="0.5 0.6 0.03282" rpy="1.5708 0 3.14159"/>
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/smart_fork.stl"/></geometry>
+      <material name="light_metal"/>
+    </visual>
+
+    <visual name="fork_fr">
+      <origin xyz="0.5 -0.6 0.03282" rpy="1.5708 0 0"/>
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/smart_fork.stl"/></geometry>
+      <material name="light_metal"/>
+    </visual>
+
+    <visual name="fork_rl">
+      <origin xyz="-0.5 0.6 0.03282" rpy="1.5708 0 3.14159"/>
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/smart_fork.stl"/></geometry>
+      <material name="light_metal"/>
+    </visual>
+
+    <visual name="fork_rr">
+      <origin xyz="-0.5 -0.6 0.03282" rpy="1.5708 0 0"/>
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/smart_fork.stl"/></geometry>
+      <material name="light_metal"/>
+    </visual>
+
+  </link>
+
+  <!-- ============================================================ -->
+  <!-- OAK-D CAMERA (mounted on antenna pole, below GPS)            -->
+  <!-- ============================================================ -->
+  <link name="oak_link">
+    <inertial>
+      <mass value="0.5"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+    <visual name="oak_visual">
+      <origin xyz="0 0 0" rpy="3.14159 -0.5236 -1.5708"/>
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/oak-d_simplified.stl"/></geometry>
+      <material name="sensor_dark"/>
+    </visual>
+    <visual name="camera_housing">
+      <origin xyz="-0.08 -0.022 -0.04" rpy="3.14159 -0.5236 -1.5708"/>
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/camera_housing.stl"/></geometry>
+      <material name="dark_metal"/>
+    </visual>
+    <visual name="camera_bracket">
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/camera_bracket.stl"/></geometry>
+      <material name="light_metal"/>
+    </visual>
+    <collision name="oak_col">
+      <origin xyz="0 0 0" rpy="3.14159 -0.5236 -1.5708"/>
+      <geometry><box size="0.12 0.05 0.04"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="oak_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="oak_link"/>
+    <origin xyz="0 0 2.1" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ============================================================ -->
+  <!-- GPS ANTENNA (top of antenna pole)                             -->
+  <!-- ============================================================ -->
+  <link name="gps_link">
+    <inertial>
+      <mass value="1.5"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+    <visual name="gps_visual">
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/gps_antenna.stl"/></geometry>
+      <material name="light_metal"/>
+    </visual>
+    <collision name="gps_col">
+      <geometry><cylinder radius="0.075" length="0.066"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="gps_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="gps_link"/>
+    <origin xyz="0 0 2.6" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ============================================================ -->
+  <!-- IMU (invisible, on top frame)                                 -->
+  <!-- ============================================================ -->
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 1.9" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ============================================================ -->
+  <!-- FRONT LEFT WHEEL                                              -->
+  <!-- ============================================================ -->
+  <link name="front_left_wheel_link">
+    <inertial>
+      <mass value="10.0"/>
+      <inertia ixx="0.004411" ixy="0" ixz="0" iyy="0.002467" iyz="0" izz="0.002467"/>
+    </inertial>
+    <visual name="fl_wheel_vis">
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/wheel.stl"/></geometry>
+      <material name="rubber_black"/>
+    </visual>
+    <collision name="fl_wheel_col">
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.216" length="0.103"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_left_wheel_link"/>
+    <origin xyz="0.5 0.6 0.03282" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="55" velocity="30"/>
+  </joint>
+
+  <!-- ============================================================ -->
+  <!-- FRONT RIGHT WHEEL                                             -->
+  <!-- ============================================================ -->
+  <link name="front_right_wheel_link">
+    <inertial>
+      <mass value="10.0"/>
+      <inertia ixx="0.004411" ixy="0" ixz="0" iyy="0.002467" iyz="0" izz="0.002467"/>
+    </inertial>
+    <visual name="fr_wheel_vis">
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/wheel.stl"/></geometry>
+      <material name="rubber_black"/>
+    </visual>
+    <collision name="fr_wheel_col">
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.216" length="0.103"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_right_wheel_link"/>
+    <origin xyz="0.5 -0.6 0.03282" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="55" velocity="30"/>
+  </joint>
+
+  <!-- ============================================================ -->
+  <!-- REAR LEFT WHEEL                                               -->
+  <!-- ============================================================ -->
+  <link name="rear_left_wheel_link">
+    <inertial>
+      <mass value="10.0"/>
+      <inertia ixx="0.004411" ixy="0" ixz="0" iyy="0.002467" iyz="0" izz="0.002467"/>
+    </inertial>
+    <visual name="rl_wheel_vis">
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/wheel.stl"/></geometry>
+      <material name="rubber_black"/>
+    </visual>
+    <collision name="rl_wheel_col">
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.216" length="0.103"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_left_wheel_link"/>
+    <origin xyz="-0.5 0.6 0.03282" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="55" velocity="30"/>
+  </joint>
+
+  <!-- ============================================================ -->
+  <!-- REAR RIGHT WHEEL                                              -->
+  <!-- ============================================================ -->
+  <link name="rear_right_wheel_link">
+    <inertial>
+      <mass value="10.0"/>
+      <inertia ixx="0.004411" ixy="0" ixz="0" iyy="0.002467" iyz="0" izz="0.002467"/>
+    </inertial>
+    <visual name="rr_wheel_vis">
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><mesh filename="package://virtual_maize_field/models/amiga/meshes/wheel.stl"/></geometry>
+      <material name="rubber_black"/>
+    </visual>
+    <collision name="rr_wheel_col">
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.216" length="0.103"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_right_wheel_link"/>
+    <origin xyz="-0.5 -0.6 0.03282" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="55" velocity="30"/>
+  </joint>
+
+</robot>

@@ -1,0 +1,40 @@
+Category,Parameter,Priority,Default,Type,Description
+Field Layout,row_length,Must set,12.0,float,Length of each crop row (meters)
+Field Layout,rows_count,Must set,6,int,Number of parallel rows
+Field Layout,row_width,Recommended,0.75,float,Gap between rows (meters)
+Field Layout,row_segments,Must set,"[straight, curved]",list,Row shape types to use
+Field Layout,rows_curve_budget,Optional,1.5708,float,Max total curvature (radians)
+Straight Segments,row_segment_straight_length_min,Optional,0.5,float,Min straight segment length (meters)
+Straight Segments,row_segment_straight_length_max,Optional,1.0,float,Max straight segment length (meters)
+Sinusoidal Curves,row_segment_sincurved_offset_min,Optional,0.5,float,Min lateral offset (meters)
+Sinusoidal Curves,row_segment_sincurved_offset_max,Optional,1.5,float,Max lateral offset (meters)
+Sinusoidal Curves,row_segment_sincurved_length_min,Optional,3.0,float,Min S-curve length (meters)
+Sinusoidal Curves,row_segment_sincurved_length_max,Optional,5.0,float,Max S-curve length (meters)
+Curved Segments,row_segment_curved_radius_min,Optional,3.0,float,Min turn radius (meters)
+Curved Segments,row_segment_curved_radius_max,Optional,10.0,float,Max turn radius (meters)
+Curved Segments,row_segment_curved_arc_measure_min,Optional,0.3,float,Min arc angle (radians)
+Curved Segments,row_segment_curved_arc_measure_max,Optional,1.0,float,Max arc angle (radians)
+Island Segments,row_segment_island_radius_min,Optional,1.0,float,Min island radius (meters)
+Island Segments,row_segment_island_radius_max,Optional,3.0,float,Max island radius (meters)
+Ground / Terrain,ground_resolution,Optional,0.02,float,Heightmap detail (meters/pixel)
+Ground / Terrain,ground_elevation_max,Recommended,0.2,float,Terrain bumpiness (meters). Set 0 for flat.
+Ground / Terrain,ground_headland,Optional,2.0,float,Flat turning area around field (meters)
+Ground / Terrain,ground_ditch_depth,Optional,0.3,float,Ditch depth at field edges (meters)
+Plant Properties,plant_spacing_min,Optional,0.13,float,Min in-row plant spacing (meters)
+Plant Properties,plant_spacing_max,Optional,0.19,float,Max in-row plant spacing (meters)
+Plant Properties,plant_height_min,Recommended,0.3,float,Shortest corn height (meters)
+Plant Properties,plant_height_max,Recommended,0.6,float,Tallest corn height (meters)
+Plant Properties,plant_radius,Optional,0.3,float,Plant collision radius (meters)
+Plant Properties,plant_radius_noise,Optional,0.05,float,Random variation in radius (meters)
+Plant Properties,plant_placement_error_max,Optional,0.02,float,Max lateral planting error (meters)
+Plant Properties,plant_mass,Optional,0.3,float,Mass of each plant (kg)
+Gaps / Holes,hole_prob,Recommended,"[0.06, 0.06, 0.04, 0.04, 0.0, 0.0]",float/list,Gap probability (0-1) per row
+Gaps / Holes,hole_size_max,Recommended,"[7, 5, 5, 3, 0, 0]",int/list,Max missing plants per gap
+Crop Types,crop_types,Optional,"[maize_01, maize_02]",list,Which corn models to use
+Weeds,weeds,Optional,0,int,Number of weed objects in field
+Weeds,weed_types,Optional,"[nettle, unknown_weed, dandelion]",list,Weed models (dandelion NOT available)
+Litter / Obstacles,litters,Optional,0,int,Number of litter objects in field
+Litter / Obstacles,litter_types,Optional,"[ale, beer, coke_can, retro_pepsi_can]",list,Litter models to use
+Special,ghost_objects,Optional,false,bool,No-collision objects (vision-only tasks)
+Special,location_markers,Optional,false,bool,Place A/B navigation marker poles
+Reproducibility,seed,Must set,-1,int,Random seed. -1 = random. Fixed number = reproducible.

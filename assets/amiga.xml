@@ -1,0 +1,100 @@
+<mujoco model="AmigaV6">
+    <asset>
+        <mesh name="wheel" file="wheel.stl" scale="1e-3 1e-3 1e-3" refquat="0.707107 0.707106 0 0"/>
+        <mesh name="fork" file="smart_fork.stl" scale="1e-3 1e-3 1e-3" refquat="-0.707107 0.707106 0 0"/>
+        <mesh name="oak" file="OAK-D_simplified.stl" scale="1e-3 1e-3 1e-3" refquat="0.707107 0.707106 0 0"/>
+        <mesh name="gps_antenna" file="gps_antenna.stl" scale="1 1 1" refquat="0.707107 0.707106 0 0"/>
+    </asset>
+
+    <default>
+        <default class="fork">
+            <geom rgba="0.80 0.79 0.76 1.0"></geom>
+        </default>
+        <default class="wheel">
+            <geom type="mesh" group="1" mesh="wheel" rgba="0.231 0.231 0.231 1.0" friction="1.2 0.007 0.01" solimp="0.7 0.8 0.01" solref="0.1 1"></geom>
+        </default>
+        <default class="oak">
+            <geom rgba="0.80 0.79 0.76 1.0"></geom>
+        </default>
+        <default class="gps_antenna">
+            <geom rgba="0.80 0.79 0.76 1.0"></geom>
+        </default>
+        <joint pos="0 0 0" axis="0 1 0" damping="10" armature="0.1"/>
+    </default>
+
+    <worldbody>
+        <body name="robot0:base_link" pos="0 0 0.2">
+            <joint type="free"></joint>
+            <!-- OAK -->
+            <body name="oak_body" pos="0 0 1">
+                <inertial pos="0 0 0" mass="0.5" diaginertia="0.0001 0.0001 0.0001"/>
+                <geom type="mesh" group="1" mesh="oak" class="oak" pos="0 0 0" euler="3.14159 -0.5236 -1.5708"/>
+                <site name="oak_site" pos="0 0 0" size="0.001 0.001 0.001" rgba="0 0 0 0"/>
+            </body>
+
+            <!-- GPS Receiver -->
+            <body name="gps_antenna" pos="0 0 1.1">
+                <inertial pos="0 0 0" mass="1.5" diaginertia="0.0001 0.0001 0.0001"/>
+                <geom type="mesh" group="1" mesh="gps_antenna" class="gps_antenna" pos="0 0 0" euler="1.5708 0 0"/>
+                <site name="gps_site" pos="0 0 0" size="0.001 0.001 0.001" rgba="0 0 0 0"/>
+            </body>
+
+            <!-- Wheels -->
+            <geom type="mesh" group="1" mesh="fork" class="fork" pos="0.5 0.6 0.03282" quat="0.0 0.0 0.0 1.0"/>
+            <body name="front_left_wheel_link" pos="0.5 0.6 0.03282">
+                <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="10.0" diaginertia="0.004411 0.002467 0.002467" />
+                <joint name="front_left_wheel"/>
+                <geom class="wheel"/>
+            </body>
+
+            <geom type="mesh" group="1" mesh="fork" class="fork" pos="0.5 -0.6 0.03282"/>
+            <body name="front_right_wheel_link" pos="0.5 -0.6 0.03282">
+                <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="10.0" diaginertia="0.004411 0.002467 0.002467" />
+                <joint name="front_right_wheel"/>
+                <geom class="wheel"/>
+            </body>
+
+            <geom type="mesh" group="1" mesh="fork" class="fork" pos="-0.5 0.6 0.03282" quat="0.0 0.0 0.0 1.0"/>
+            <body name="rear_left_wheel_link" pos="-0.5 0.6 0.03282">
+                <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="10.0" diaginertia="0.004411 0.002467 0.002467" />
+                <joint name="rear_left_wheel"/>
+                <geom class="wheel"/>
+            </body>
+
+            <geom type="mesh" group="1" mesh="fork" class="fork" pos="-0.5 -0.6 0.03282"/>
+            <body name="rear_right_wheel_link" pos="-0.5 -0.6 0.03282">
+                <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="10.0" diaginertia="0.004411 0.002467 0.002467" />
+                <joint name="rear_right_wheel"/>
+                <geom class="wheel"/>
+            </body>
+
+            <!-- Bars -->
+            <!-- cross bar -->
+            <geom type="box" size="0.025 0.7 0.025" pos="0.5 0 0.45" rgba="0.5 0.5 0.5 1" mass="10.0"/>
+            <geom type="box" size="0.025 0.7 0.025" pos="-0.5 0 0.45" rgba="0.5 0.5 0.5 1" mass="10.0"/>
+
+            <!-- truck bar -->
+            <geom type="box" size="0.65 0.025 0.025" pos="0 0.65 0.4" rgba="0.5 0.5 0.5 1" mass="10.0"/>
+            <geom type="box" size="0.65 0.025 0.025" pos="0 0.55 0.4" rgba="0.5 0.5 0.5 1" mass="10.0"/>
+            <geom type="box" size="0.65 0.025 0.025" pos="0 -0.65 0.4" rgba="0.5 0.5 0.5 1" mass="10.0"/>
+            <geom type="box" size="0.65 0.025 0.025" pos="0 -0.55 0.4" rgba="0.5 0.5 0.5 1" mass="10.0"/>
+
+            <!-- antenna bar -->
+            <geom type="box" size="0.025 0.7 0.025" pos="-0.05 0 0.45" rgba="0.5 0.5 0.5 1" mass="10.0"/>
+            <geom type="box" size="0.025 0.025 0.35" pos="0 0 0.75" rgba="0.5 0.5 0.5 1" mass="10.0"/>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <velocity name="wheel_fl" joint="front_left_wheel"  kv="0.1" gear="30" forcerange="-55 55"/>
+        <velocity name="wheel_fr" joint="front_right_wheel" kv="0.1" gear="30" forcerange="-55 55"/>
+        <velocity name="wheel_rl" joint="rear_left_wheel"   kv="0.1" gear="30" forcerange="-55 55"/>
+        <velocity name="wheel_rr" joint="rear_right_wheel"  kv="0.1" gear="30" forcerange="-55 55"/>
+    </actuator>
+
+    <sensor>
+        <accelerometer name="accelerometer" site="oak_site"/>
+        <gyro name="gyro" site="oak_site"/>
+        <framepos objtype="site" objname="gps_site"/>
+    </sensor>
+</mujoco>

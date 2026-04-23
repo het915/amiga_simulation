@@ -1,0 +1,30 @@
+  Terminal 1 — Build, generate, and launch:                                                                                             
+  cd ~/het_project/next_gen_lab/sim_corn_fields                                                                                         
+  source /opt/ros/humble/setup.bash            
+  colcon build                                                                                                                          
+  source install/setup.bash
+  ros2 run virtual_maize_field generate_world custom_field                                                                              
+  ros2 launch virtual_maize_field drive_robot.launch.py   
+  
+  
+  colcon build && source install/setup.bash                                                                                             
+  ros2 run virtual_maize_field generate_world good_field
+  ros2 launch virtual_maize_field drive_robot.launch.py
+  
+  
+                                                                                                                                        
+  Wait ~15 seconds for everything to load.
+                                                                                                                                        
+  Terminal 2 — Drive the robot:
+  source /opt/ros/humble/setup.bash                                                                                                     
+  ros2 run teleop_twist_keyboard teleop_twist_keyboard
+                                                                                                                                        
+  Terminal 3 (optional) — View camera:
+  source /opt/ros/humble/setup.bash                                                                                                     
+  ros2 run rqt_image_view rqt_image_view
+                                                                                                                                        
+  Terminal 4 (optional) — Check topics:
+  source /opt/ros/humble/setup.bash                                                                                                     
+  ros2 topic list                  
+  ros2 topic hz /oak/rgb                                                                                                                
+  ros2 topic echo /odom --once

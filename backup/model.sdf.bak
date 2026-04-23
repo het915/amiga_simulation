@@ -1,0 +1,638 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="amiga">
+    <static>false</static>
+
+    <!-- ============================================================ -->
+    <!-- BASE LINK                                                     -->
+    <!-- ============================================================ -->
+    <link name="base_link">
+      <pose>0 0 0.2 0 0 0</pose>
+
+      <inertial>
+        <mass>60.0</mass>
+        <inertia>
+          <ixx>5.0</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>5.0</iyy> <iyz>0</iyz>
+          <izz>5.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- ========== FRAME BARS (raised above canopy) ========== -->
+
+      <!-- Cross braces (4 lateral bars connecting left to right) -->
+      <!-- Top pair at z=1.9 -->
+      <visual name="brace_top_1"><pose>-0.025 0 1.9 0 0 0</pose>
+        <geometry><box><size>0.05 1.4 0.05</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+      <collision name="brace_top_1_col"><pose>-0.025 0 1.9 0 0 0</pose>
+        <geometry><box><size>0.05 1.4 0.05</size></box></geometry>
+      </collision>
+
+      <visual name="brace_top_2"><pose>0.025 0 1.9 0 0 0</pose>
+        <geometry><box><size>0.05 1.4 0.05</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+      <collision name="brace_top_2_col"><pose>0.025 0 1.9 0 0 0</pose>
+        <geometry><box><size>0.05 1.4 0.05</size></box></geometry>
+      </collision>
+
+      <!-- Second top pair offset in X -->
+      <visual name="brace_top_3"><pose>-0.075 0 1.9 0 0 0</pose>
+        <geometry><box><size>0.05 1.4 0.05</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+      <collision name="brace_top_3_col"><pose>-0.075 0 1.9 0 0 0</pose>
+        <geometry><box><size>0.05 1.4 0.05</size></box></geometry>
+      </collision>
+
+      <visual name="brace_top_4"><pose>0.075 0 1.9 0 0 0</pose>
+        <geometry><box><size>0.05 1.4 0.05</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+      <collision name="brace_top_4_col"><pose>0.075 0 1.9 0 0 0</pose>
+        <geometry><box><size>0.05 1.4 0.05</size></box></geometry>
+      </collision>
+
+      <!-- Left side rails -->
+      <visual name="truck_bar_left_outer_visual">
+        <pose>0 0.65 0.4 0 0 0</pose>
+        <geometry><box><size>1.3 0.05 0.05</size></box></geometry>
+        <material>
+          <ambient>0.35 0.35 0.35 1</ambient>
+          <diffuse>0.45 0.45 0.45 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+      <collision name="truck_bar_left_outer_collision">
+        <pose>0 0.65 0.4 0 0 0</pose>
+        <geometry><box><size>1.3 0.05 0.05</size></box></geometry>
+      </collision>
+
+      <visual name="truck_bar_left_inner_visual">
+        <pose>0 0.55 0.4 0 0 0</pose>
+        <geometry><box><size>1.3 0.05 0.05</size></box></geometry>
+        <material>
+          <ambient>0.35 0.35 0.35 1</ambient>
+          <diffuse>0.45 0.45 0.45 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+      <collision name="truck_bar_left_inner_collision">
+        <pose>0 0.55 0.4 0 0 0</pose>
+        <geometry><box><size>1.3 0.05 0.05</size></box></geometry>
+      </collision>
+
+      <!-- Right side rails -->
+      <visual name="truck_bar_right_outer_visual">
+        <pose>0 -0.65 0.4 0 0 0</pose>
+        <geometry><box><size>1.3 0.05 0.05</size></box></geometry>
+        <material>
+          <ambient>0.35 0.35 0.35 1</ambient>
+          <diffuse>0.45 0.45 0.45 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+      <collision name="truck_bar_right_outer_collision">
+        <pose>0 -0.65 0.4 0 0 0</pose>
+        <geometry><box><size>1.3 0.05 0.05</size></box></geometry>
+      </collision>
+
+      <visual name="truck_bar_right_inner_visual">
+        <pose>0 -0.55 0.4 0 0 0</pose>
+        <geometry><box><size>1.3 0.05 0.05</size></box></geometry>
+        <material>
+          <ambient>0.35 0.35 0.35 1</ambient>
+          <diffuse>0.45 0.45 0.45 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+      <collision name="truck_bar_right_inner_collision">
+        <pose>0 -0.55 0.4 0 0 0</pose>
+        <geometry><box><size>1.3 0.05 0.05</size></box></geometry>
+      </collision>
+
+      <!-- Vertical uprights (8 total, 0.05m spacing per pair, 2 per rod) -->
+      <!-- Left side, outer rod (y=0.65) -->
+      <visual name="upright_lo_1"><pose>-0.025 0.65 1.15 0 0 0</pose>
+        <geometry><box><size>0.04 0.04 1.5</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+      <visual name="upright_lo_2"><pose>0.025 0.65 1.15 0 0 0</pose>
+        <geometry><box><size>0.04 0.04 1.5</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+      <!-- Left side, inner rod (y=0.55) -->
+      <visual name="upright_li_1"><pose>-0.025 0.55 1.15 0 0 0</pose>
+        <geometry><box><size>0.04 0.04 1.5</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+      <visual name="upright_li_2"><pose>0.025 0.55 1.15 0 0 0</pose>
+        <geometry><box><size>0.04 0.04 1.5</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+      <!-- Right side, inner rod (y=-0.55) -->
+      <visual name="upright_ri_1"><pose>-0.025 -0.55 1.15 0 0 0</pose>
+        <geometry><box><size>0.04 0.04 1.5</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+      <visual name="upright_ri_2"><pose>0.025 -0.55 1.15 0 0 0</pose>
+        <geometry><box><size>0.04 0.04 1.5</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+      <!-- Right side, outer rod (y=-0.65) -->
+      <visual name="upright_ro_1"><pose>-0.025 -0.65 1.15 0 0 0</pose>
+        <geometry><box><size>0.04 0.04 1.5</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+      <visual name="upright_ro_2"><pose>0.025 -0.65 1.15 0 0 0</pose>
+        <geometry><box><size>0.04 0.04 1.5</size></box></geometry>
+        <material><ambient>0.35 0.35 0.35 1</ambient><diffuse>0.45 0.45 0.45 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
+      </visual>
+
+      <!-- Antenna vertical pole -->
+      <visual name="antenna_pole_visual">
+        <pose>0 0 1.05 0 0 0</pose>
+        <geometry><box><size>0.05 0.05 0.7</size></box></geometry>
+        <material>
+          <ambient>0.35 0.35 0.35 1</ambient>
+          <diffuse>0.45 0.45 0.45 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+      <collision name="antenna_pole_collision">
+        <pose>0 0 1.05 0 0 0</pose>
+        <geometry><box><size>0.05 0.05 0.7</size></box></geometry>
+      </collision>
+
+      <!-- ========== FORKS ========== -->
+      <!-- Raw mesh is Y-up, +90° X to stand upright, left side gets 180° Z mirror -->
+
+      <visual name="fork_fl_visual">
+        <pose>0.5 0.6 0.03282 1.5708 0 3.14159</pose>
+        <geometry><mesh><uri>meshes/smart_fork.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.90 0.90 0.90 1</ambient>
+          <diffuse>0.95 0.95 0.95 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+
+      <visual name="fork_fr_visual">
+        <pose>0.5 -0.6 0.03282 1.5708 0 0</pose>
+        <geometry><mesh><uri>meshes/smart_fork.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.90 0.90 0.90 1</ambient>
+          <diffuse>0.95 0.95 0.95 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+
+      <visual name="fork_rl_visual">
+        <pose>-0.5 0.6 0.03282 1.5708 0 3.14159</pose>
+        <geometry><mesh><uri>meshes/smart_fork.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.90 0.90 0.90 1</ambient>
+          <diffuse>0.95 0.95 0.95 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+
+      <visual name="fork_rr_visual">
+        <pose>-0.5 -0.6 0.03282 1.5708 0 0</pose>
+        <geometry><mesh><uri>meshes/smart_fork.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.90 0.90 0.90 1</ambient>
+          <diffuse>0.95 0.95 0.95 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+
+    </link>
+
+    <!-- ============================================================ -->
+    <!-- OAK-D CAMERA + HOUSING                                        -->
+    <!-- ============================================================ -->
+    <link name="oak_link">
+      <pose relative_to="base_link">0 0 1.3 0 0 0</pose>
+      <inertial>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>0.0001</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>0.0001</iyy> <iyz>0</iyz>
+          <izz>0.0001</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="oak_visual">
+        <pose>0 0 0 3.14159 -0.5236 -1.5708</pose>
+        <geometry><mesh><uri>meshes/oak-d_simplified.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.15 0.15 0.15 1</ambient>
+          <diffuse>0.20 0.20 0.20 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+
+      <visual name="camera_housing_visual">
+        <pose>-0.08 -0.022 -0.04 3.14159 -0.5236 -1.5708</pose>
+        <geometry><mesh><uri>meshes/camera_housing.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.10 0.10 0.10 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+
+      <visual name="camera_bracket_visual">
+        <pose>0 0 0.02 0 0 0</pose>
+        <geometry><mesh><uri>meshes/camera_bracket.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.60 0.59 0.56 1</ambient>
+          <diffuse>0.70 0.69 0.66 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+
+      <collision name="oak_collision">
+        <pose>0 0 0 3.14159 -0.5236 -1.5708</pose>
+        <geometry><box><size>0.12 0.05 0.04</size></box></geometry>
+      </collision>
+
+      <sensor name="oak_d_camera" type="rgbd_camera">
+        <always_on>true</always_on>
+        <update_rate>15</update_rate>
+        <pose>0 0 0 0 0.5236 0</pose>
+        <camera name="oak_d">
+          <horizontal_fov>1.2217</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.2</near>
+            <far>20.0</far>
+          </clip>
+          <depth_camera>
+            <clip>
+              <near>0.2</near>
+              <far>10.0</far>
+            </clip>
+          </depth_camera>
+        </camera>
+      </sensor>
+    </link>
+
+    <joint name="oak_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>oak_link</child>
+    </joint>
+
+    <!-- ============================================================ -->
+    <!-- GPS ANTENNA                                                   -->
+    <!-- ============================================================ -->
+    <link name="gps_link">
+      <pose relative_to="base_link">0 0 1.4 0 0 0</pose>
+      <inertial>
+        <mass>1.5</mass>
+        <inertia>
+          <ixx>0.0001</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>0.0001</iyy> <iyz>0</iyz>
+          <izz>0.0001</izz>
+        </inertia>
+      </inertial>
+      <visual name="gps_visual">
+        <geometry><mesh><uri>meshes/gps_antenna.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.70 0.69 0.66 1</ambient>
+          <diffuse>0.80 0.79 0.76 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+      <collision name="gps_collision">
+        <geometry>
+          <cylinder><radius>0.075</radius><length>0.066</length></cylinder>
+        </geometry>
+      </collision>
+
+      <sensor name="navsat" type="navsat">
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>
+      </sensor>
+    </link>
+
+    <joint name="gps_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>gps_link</child>
+    </joint>
+
+    <!-- ============================================================ -->
+    <!-- IMU SENSOR                                                    -->
+    <!-- ============================================================ -->
+    <link name="imu_link">
+      <pose relative_to="base_link">0 0 0.75 0 0 0</pose>
+      <inertial>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>0.00001</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>0.00001</iyy> <iyz>0</iyz>
+          <izz>0.00001</izz>
+        </inertia>
+      </inertial>
+
+      <sensor name="imu_sensor" type="imu">
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <imu>
+          <angular_velocity>
+            <x><noise type="gaussian"><mean>0</mean><stddev>0.0002</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0</mean><stddev>0.0002</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0</mean><stddev>0.0002</stddev></noise></z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x><noise type="gaussian"><mean>0</mean><stddev>0.017</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0</mean><stddev>0.017</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0</mean><stddev>0.017</stddev></noise></z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+    </link>
+
+    <joint name="imu_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>imu_link</child>
+    </joint>
+
+    <!-- ============================================================ -->
+    <!-- FRONT LEFT WHEEL                                              -->
+    <!-- ============================================================ -->
+    <link name="front_left_wheel_link">
+      <pose relative_to="base_link">0.5 0.6 0.03282 0 0 0</pose>
+      <inertial>
+        <mass>10.0</mass>
+        <inertia>
+          <ixx>0.004411</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>0.002467</iyy> <iyz>0</iyz>
+          <izz>0.002467</izz>
+        </inertia>
+      </inertial>
+      <visual name="fl_wheel_visual">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry><mesh><uri>meshes/wheel.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.10 0.10 0.10 1</ambient>
+          <diffuse>0.20 0.20 0.20 1</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="fl_wheel_collision">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry>
+          <cylinder><radius>0.216</radius><length>0.103</length></cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode><mu>1.2</mu><mu2>0.8</mu2></ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e6</kp>
+              <kd>100</kd>
+              <min_depth>0.003</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <joint name="front_left_wheel_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>front_left_wheel_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics><damping>10.0</damping></dynamics>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+          <effort>55</effort>
+        </limit>
+      </axis>
+    </joint>
+
+    <!-- ============================================================ -->
+    <!-- FRONT RIGHT WHEEL                                             -->
+    <!-- ============================================================ -->
+    <link name="front_right_wheel_link">
+      <pose relative_to="base_link">0.5 -0.6 0.03282 0 0 0</pose>
+      <inertial>
+        <mass>10.0</mass>
+        <inertia>
+          <ixx>0.004411</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>0.002467</iyy> <iyz>0</iyz>
+          <izz>0.002467</izz>
+        </inertia>
+      </inertial>
+      <visual name="fr_wheel_visual">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry><mesh><uri>meshes/wheel.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.10 0.10 0.10 1</ambient>
+          <diffuse>0.20 0.20 0.20 1</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="fr_wheel_collision">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry>
+          <cylinder><radius>0.216</radius><length>0.103</length></cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode><mu>1.2</mu><mu2>0.8</mu2></ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e6</kp>
+              <kd>100</kd>
+              <min_depth>0.003</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <joint name="front_right_wheel_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>front_right_wheel_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics><damping>10.0</damping></dynamics>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+          <effort>55</effort>
+        </limit>
+      </axis>
+    </joint>
+
+    <!-- ============================================================ -->
+    <!-- REAR LEFT WHEEL                                               -->
+    <!-- ============================================================ -->
+    <link name="rear_left_wheel_link">
+      <pose relative_to="base_link">-0.5 0.6 0.03282 0 0 0</pose>
+      <inertial>
+        <mass>10.0</mass>
+        <inertia>
+          <ixx>0.004411</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>0.002467</iyy> <iyz>0</iyz>
+          <izz>0.002467</izz>
+        </inertia>
+      </inertial>
+      <visual name="rl_wheel_visual">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry><mesh><uri>meshes/wheel.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.10 0.10 0.10 1</ambient>
+          <diffuse>0.20 0.20 0.20 1</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="rl_wheel_collision">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry>
+          <cylinder><radius>0.216</radius><length>0.103</length></cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode><mu>1.2</mu><mu2>0.8</mu2></ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e6</kp>
+              <kd>100</kd>
+              <min_depth>0.003</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <joint name="rear_left_wheel_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>rear_left_wheel_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics><damping>10.0</damping></dynamics>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+          <effort>55</effort>
+        </limit>
+      </axis>
+    </joint>
+
+    <!-- ============================================================ -->
+    <!-- REAR RIGHT WHEEL                                              -->
+    <!-- ============================================================ -->
+    <link name="rear_right_wheel_link">
+      <pose relative_to="base_link">-0.5 -0.6 0.03282 0 0 0</pose>
+      <inertial>
+        <mass>10.0</mass>
+        <inertia>
+          <ixx>0.004411</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>0.002467</iyy> <iyz>0</iyz>
+          <izz>0.002467</izz>
+        </inertia>
+      </inertial>
+      <visual name="rr_wheel_visual">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry><mesh><uri>meshes/wheel.stl</uri></mesh></geometry>
+        <material>
+          <ambient>0.10 0.10 0.10 1</ambient>
+          <diffuse>0.20 0.20 0.20 1</diffuse>
+          <specular>0.15 0.15 0.15 1</specular>
+        </material>
+      </visual>
+      <collision name="rr_wheel_collision">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry>
+          <cylinder><radius>0.216</radius><length>0.103</length></cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode><mu>1.2</mu><mu2>0.8</mu2></ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e6</kp>
+              <kd>100</kd>
+              <min_depth>0.003</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <joint name="rear_right_wheel_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>rear_right_wheel_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics><damping>10.0</damping></dynamics>
+        <limit>
+          <lower>-1e16</lower>
+          <upper>1e16</upper>
+          <effort>55</effort>
+        </limit>
+      </axis>
+    </joint>
+
+    <!-- ============================================================ -->
+    <!-- PLUGINS                                                       -->
+    <!-- ============================================================ -->
+
+    <plugin
+      filename="ignition-gazebo-diff-drive-system"
+      name="ignition::gazebo::systems::DiffDrive">
+      <left_joint>front_left_wheel_joint</left_joint>
+      <left_joint>rear_left_wheel_joint</left_joint>
+      <right_joint>front_right_wheel_joint</right_joint>
+      <right_joint>rear_right_wheel_joint</right_joint>
+      <wheel_separation>1.2</wheel_separation>
+      <wheel_radius>0.216</wheel_radius>
+      <max_linear_acceleration>1.0</max_linear_acceleration>
+      <min_linear_acceleration>-1.0</min_linear_acceleration>
+      <max_angular_acceleration>2.0</max_angular_acceleration>
+      <min_angular_acceleration>-2.0</min_angular_acceleration>
+      <topic>cmd_vel</topic>
+      <odom_topic>odom</odom_topic>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+      <odom_publish_frequency>20</odom_publish_frequency>
+    </plugin>
+
+    <plugin
+      filename="ignition-gazebo-joint-state-publisher-system"
+      name="ignition::gazebo::systems::JointStatePublisher">
+    </plugin>
+
+    <plugin
+      filename="ignition-gazebo-imu-system"
+      name="ignition::gazebo::systems::Imu">
+    </plugin>
+
+    <plugin
+      filename="ignition-gazebo-navsat-system"
+      name="ignition::gazebo::systems::NavSat">
+    </plugin>
+
+    <plugin
+      filename="ignition-gazebo-sensors-system"
+      name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+  </model>
+</sdf>

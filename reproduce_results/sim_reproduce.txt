@@ -1,0 +1,260 @@
+================================================================================
+  VIRTUAL MAIZE FIELD SIMULATION — REPRODUCTION GUIDE
+  Amiga V6 Robot in Corn Field | Ignition Fortress + ROS 2 Humble
+  Date: April 2026
+================================================================================
+
+TABLE OF CONTENTS
+-----------------
+  1. Prerequisites
+  2. Quick Start (Full Simulation with Teleop)
+  3. View Robot Only (RViz2)
+  4. Generate Custom Corn Fields
+  5. ROS2 Topics Reference
+  6. Teleop Controls
+  7. Troubleshooting
+  8. File Reference
+
+================================================================================
+1. PREREQUISITES
+================================================================================
+
+System:
+  - Ubuntu 22.04 (Jammy)
+  - ROS 2 Humble
+  - Ignition Fortress
+  - colcon build tools
+
+Install Ignition Fortress (if not already):
+
+  sudo wget https://packages.osrfoundation.org/gazebo.gpg \
+      -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+  echo "deb [arch=$(dpkg --print-architecture) \
+      signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] \
+      http://packages.osrfoundation.org/gazebo/ubuntu-stable \
+      $(lsb_release -cs) main" | \
+      sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+  sudo apt-get update
+  sudo apt-get install -y ignition-fortress
+
+Install ROS-Ignition bridge:
+
+  sudo apt-get install -y \
+      ros-humble-ros-ign \
+      ros-humble-ros-ign-bridge \
+      ros-humble-ros-ign-gazebo \
+      ros-humble-ros-ign-image
+
+Install teleop and visualization tools:
+
+  sudo apt-get install -y \
+      ros-humble-teleop-twist-keyboard \
+      ros-humble-joint-state-publisher \
+      ros-humble-joint-state-publisher-gui
+
+================================================================================
+2. QUICK START — FULL SIMULATION WITH TELEOP
+================================================================================
+
+Step 1: Build the workspace
+  cd ~/het_project/next_gen_lab/sim_corn_fields
+  source /opt/ros/humble/setup.bash
+  colcon build
+
+Step 2: Source the workspace (do this in EVERY new terminal)
+  source /opt/ros/humble/setup.bash
+  source ~/het_project/next_gen_lab/sim_corn_fields/install/setup.bash
+
+Step 3: Generate a corn field world
+  ros2 run virtual_maize_field generate_world custom_field
+
+Step 4: Launch the simulation (Terminal 1)
+  ros2 launch virtual_maize_field drive_robot.launch.py
+
+  This will:
+    - Launch Ignition Fortress with the corn field
+    - Spawn the Amiga robot at the field start position (after 8 seconds)
+    - Start all ROS2 bridges (cmd_vel, odom, joint_states, camera) (after 12 seconds)
+    - Start robot_state_publisher for TF
+
+  Wait ~15 seconds for everything to initialize.
+
+Step 5: Drive the robot (Terminal 2)
+  source /opt/ros/humble/setup.bash
+  ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+  Press 'i' to move forward. See Section 6 for full controls.
+
+Step 6 (optional): View camera feed (Terminal 3)
+  source /opt/ros/humble/setup.bash
+  ros2 run rqt_image_view rqt_image_view
+  # Select /oak/rgb or /oak/depth from dropdown
+
+================================================================================
+3. VIEW ROBOT ONLY (RVIZ2) — No Gazebo needed
+================================================================================
+
+This launches just the robot model in RViz2 for visual inspection.
+No physics, no simulation — just the 3D model with TF frames.
+
+  source /opt/ros/humble/setup.bash
+  source ~/het_project/next_gen_lab/sim_corn_fields/install/setup.bash
+  ros2 launch virtual_maize_field view_robot.launch.py
+
+RViz2 opens with:
+  - RobotModel display (visual meshes)
+  - TF frames visible
+  - Saved views: Overview, Camera Closeup, Wheel Closeup, Top Down
+  - Toggle CollisionModel display (off by default) to inspect collision shapes
+
+================================================================================
+4. GENERATE CUSTOM CORN FIELDS
+================================================================================
+
+Using the config file:
+  Edit: src/virtual_maize_field/config/custom_field.yaml
+  Then rebuild and regenerate:
+    colcon build
+    source install/setup.bash
+    ros2 run virtual_maize_field generate_world custom_field
+
+Using the convenience script:
+  ./run_field.sh                    # default config
+  ./run_field.sh my_config          # named config
+  ./run_field.sh --headless         # no GUI
+  ./run_field.sh --map              # show 2D map
+  ./run_field.sh --generate-only    # just generate, don't launch
+  ./run_field.sh --help             # list all configs
+
+Using preset competition configs:
+  ros2 run virtual_maize_field generate_world fre22_task_navigation
+  ros2 run virtual_maize_field generate_world fre21_task_1
+
+Command-line parameter overrides:
+  ros2 run virtual_maize_field generate_world \
+      --rows_count 10 \
+      --row_length 15.0 \
+      --weeds 5 \
+      --seed 42
+
+Generated files are saved to: ~/.ros/virtual_maize_field/
+  - generated.world          (SDF world file)
+  - gt_map.png               (2D ground truth minimap)
+  - gt_map.csv               (plant locations CSV)
+  - robot_spawner.launch.py  (robot spawn launch file)
+
+================================================================================
+5. ROS2 TOPICS REFERENCE
+================================================================================
+
+When drive_robot.launch.py is running, these ROS2 topics are available:
+
+  CONTROL:
+    /cmd_vel              geometry_msgs/Twist       Velocity commands (teleop)
+    /odom                 nav_msgs/Odometry         Robot odometry
+
+  CAMERA (OAK-D):
+    /oak/rgb              sensor_msgs/Image         RGB camera (640x480, 15Hz)
+    /oak/depth            sensor_msgs/Image         Depth map (float32)
+    /oak/camera_info      sensor_msgs/CameraInfo    Camera intrinsics
+    /oak/points           sensor_msgs/PointCloud2   3D point cloud
+
+  STATE:
+    /joint_states         sensor_msgs/JointState    All joint positions/velocities
+    /robot_description    std_msgs/String           URDF model
+    /tf                   tf2_msgs/TFMessage        Transform tree
+    /tf_static            tf2_msgs/TFMessage        Static transforms
+    /clock                rosgraph_msgs/Clock       Simulation time
+
+================================================================================
+6. TELEOP KEYBOARD CONTROLS
+================================================================================
+
+  Moving:
+    u    i    o          (forward-left, forward, forward-right)
+    j    k    l          (turn-left, stop, turn-right)
+    m    ,    .          (backward-left, backward, backward-right)
+
+  Speed:
+    q/z — increase/decrease max speeds by 10%
+    w/x — increase/decrease linear speed only by 10%
+    e/c — increase/decrease angular speed only by 10%
+
+  Stop: k or spacebar
+
+================================================================================
+7. TROUBLESHOOTING
+================================================================================
+
+Robot doesn't move:
+  - Wait at least 15 seconds after launching drive_robot.launch.py
+  - Verify teleop is publishing: ros2 topic hz /cmd_vel
+  - Verify bridge is working: ign topic -e -t /cmd_vel -n 1
+  - Check if wheels are spinning in Gazebo GUI (means bridge works but
+    ground contact issue — restart sim)
+
+Simulation won't start:
+  - Kill stale processes: pkill -9 -f "ign gazebo"
+  - Retry launch
+
+Package not found:
+  - You forgot to source the workspace:
+    source ~/het_project/next_gen_lab/sim_corn_fields/install/setup.bash
+
+Config changes not taking effect:
+  - Rebuild after editing files in src/:
+    colcon build
+    source install/setup.bash
+
+Camera topics not publishing:
+  - Camera bridges start 12 seconds after launch. Wait.
+  - Verify in Ignition: ign topic -l | grep camera
+
+Gazebo GUI is slow:
+  - Use headless mode: ros2 launch virtual_maize_field drive_robot.launch.py headless:=True
+  - Use a smaller/faster field config: ros2 run virtual_maize_field generate_world fre21_task_1_fast
+
+View robot in MuJoCo (original model):
+  python3 -m mujoco.viewer --mjcf ~/het_project/next_gen_lab/sim_corn_fields/assets/amiga_scene.xml
+
+================================================================================
+8. FILE REFERENCE
+================================================================================
+
+Workspace: ~/het_project/next_gen_lab/sim_corn_fields/
+
+Key files:
+  src/virtual_maize_field/
+    config/custom_field.yaml          Editable corn field config (all params documented)
+    config/fre2*_task_*.yaml          Competition preset configs
+    models/amiga/amiga.urdf           Robot URDF (for RViz2 / robot_state_publisher)
+    models/amiga/model.sdf            Robot SDF (for Ignition Gazebo simulation)
+    models/amiga/model.config         Gazebo model metadata
+    models/amiga/meshes/              STL mesh files (wheel, fork, camera, GPS, etc.)
+    launch/simulation.launch.py       Launch corn field in Ignition
+    launch/drive_robot.launch.py      Full sim: field + robot + bridges + teleop
+    launch/view_robot.launch.py       View robot in RViz2 only
+    rviz/amiga.rviz                   RViz2 saved config with camera views
+
+  assets/                             Original MuJoCo model and STL source files
+  backup/                             Backup of previous URDF/SDF versions
+  docs/
+    virtual_maize_field_guide.pdf     Full setup & config reference (PDF)
+  run_field.sh                        Convenience script for generate + launch
+  reproduce_results/
+    sim_reproduce.txt                 This file
+
+Robot specifications (Amiga V6):
+  - Total mass: ~150 kg (frame 90 + 4 forks 20 + 4 wheels 32 + sensors 2)
+  - Wheelbase: 1.0 m
+  - Track width: 1.2 m
+  - Wheel radius: 0.216 m
+  - Ground clearance: 0.612 m (24.1 inches)
+  - Suspension: prismatic joints, +-25mm travel, 44kN/m spring, 1500 Ns/m damping
+  - Drive: 4-wheel skid-steer, 140 Nm peak torque per wheel
+  - Camera: OAK-D RGBD (640x480, 15Hz, 70 deg FOV)
+  - Sensors: GPS (NavSat 10Hz), IMU (100Hz with noise)
+
+================================================================================
+END
+================================================================================
